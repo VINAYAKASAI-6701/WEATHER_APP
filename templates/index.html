@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #6dd5fa, #2980b9);
+      color: white;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .navbar h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .form-container {
+      margin-top: 60px;
+    }
+
+    .input-group {
+      width: 100%;
+    }
+
+    .form-control {
+      border-radius: 30px 0 0 30px;
+      height: 45px;
+    }
+
+    .btn {
+      border-radius: 0 30px 30px 0;
+      height: 45px;
+      background-color: #34495e;
+      color: white;
+    }
+
+    .weather-card {
+      margin-top: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .weather-card h2 {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .weather-card h5 {
+      margin: 8px 0;
+      font-weight: 400;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <h1>🌤 Weather Detector</h1>
+  </div>
+
+  <div class="container form-container">
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Enter city name..." required>
+        <div class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    {% if data.country_code %}
+    <div class="weather-card col-md-6 col-md-offset-3">
+      <h2>{{ city }}</h2>
+      <h5><strong>Country Code:</strong> {{ data.country_code }}</h5>
+      <h5><strong>Coordinates:</strong> {{ data.coordinate }}</h5>
+      <h5><strong>Temperature:</strong> {{ data.temp }}</h5>
+      <h5><strong>Pressure:</strong> {{ data.pressure }} hPa</h5>
+      <h5><strong>Humidity:</strong> {{ data.humidity }}%</h5>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>
